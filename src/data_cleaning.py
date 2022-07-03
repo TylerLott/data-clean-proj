@@ -114,9 +114,9 @@ if __name__ == "__main__":
         "number",
         "comments",
         "desc",
-        "Id",
     ]
     REST_COLS = ["DBA Name", "AKA Name", "Facility Type", "Id"]
+    REST_INS_COLS = ["Id", "Inspection ID"]
     ADD_COLS = ["Address", "City", "State", "Zip", "Location", "Latitude", "Longitude"]
     # save off inspections df
     inspections_path = data_path / "inspections.csv"
@@ -124,6 +124,9 @@ if __name__ == "__main__":
     # save off restaurants df
     rest_path = data_path / "restaurants.csv"
     clean_df[REST_COLS].drop_duplicates().to_csv(rest_path, index=False)
+    # save off relations df
+    rest_ins_path = data_path / "restaurantInspections.csv"
+    clean_df[REST_INS_COLS].drop_duplicates().to_csv(rest_ins_path, index=False)
     # save off addresses df
     add_path = data_path / "addresses.csv"
     clean_df[ADD_COLS].drop_duplicates().to_csv(add_path, index=False)

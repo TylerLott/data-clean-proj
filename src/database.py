@@ -9,7 +9,7 @@ if __name__ == "__main__":
     db_path = data_path / "food_inspections.db"
     db = sqlite3.connect(db_path)
 
-    tables = ["inspections", "restaurants", "addresses"]
+    tables = ["inspections", "restaurants", "addresses", "restaurantInspections"]
 
     # load in cleaned data
     for t in tables:
