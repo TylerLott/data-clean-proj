@@ -8,9 +8,9 @@
 
 3. run the following commands to set up the venv
 
-`python -m venv python_env`
+   `python -m venv python_env`
 
-`python -m pip install -r requirements.txt`
+   `python -m pip install -r requirements.txt`
 
 4. Run `python ./src/data_cleaning.py`
 
