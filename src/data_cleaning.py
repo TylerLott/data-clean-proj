@@ -67,7 +67,7 @@ def create_mappings(df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         pd.DataFrame: dataframe with Id column
     """
-    df["Id"] = df.apply(
+    df["id"] = df.apply(
         lambda x: abs(
             hash(str(x["DBA Name"]) + str(x["AKA Name"]) + str(x["Facility Type"]))
         ),
@@ -77,7 +77,25 @@ def create_mappings(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def rename_cols(df: pd.DataFrame) -> pd.DataFrame:
-    return df
+    cols = {
+        "Inspection ID": "inspectionId",
+        "DBA Name": "dbaName",
+        "AKA Name": "akaName",
+        "License #": "licenseNum",
+        "Facility Type": "facilityType",
+        "Risk": "risk",
+        "Address": "address",
+        "City": "city",
+        "State": "state",
+        "Zip": "zip",
+        "Inspection Date": "date",
+        "Inspection Type": "type",
+        "Results": "results",
+        "Latitude": "latitude",
+        "Longitude": "longitude",
+        "Location": "location",
+    }
+    return df.rename(columns=cols)
 
 
 if __name__ == "__main__":
@@ -105,28 +123,28 @@ if __name__ == "__main__":
     # Save DFs
     ##########################################
     INS_COLS = [
-        "Inspection ID",
-        "License #",
-        "Inspection Date",
-        "Inspection Type",
-        "Risk",
-        "Results",
+        "inspectionId",
+        "licenseNum",
+        "date",
+        "type",
+        "risk",
+        "results",
         "number",
         "comments",
         "desc",
     ]
-    REST_COLS = ["DBA Name", "AKA Name", "Facility Type", "Id"]
-    REST_INS_COLS = ["Id", "Inspection ID"]
-    ADD_COLS = ["Address", "City", "State", "Zip", "Location", "Latitude", "Longitude"]
+    REST_COLS = ["dbaName", "akaName", "facilityType", "id"]
+    REST_INS_COLS = ["id", "inspectionId"]
+    ADD_COLS = ["address", "city", "state", "zip", "location", "latitude", "longitude"]
     # save off inspections df
-    inspections_path = data_path / "inspections.csv"
+    inspections_path = data_path / "Inspections.csv"
     clean_df[INS_COLS].drop_duplicates().to_csv(inspections_path, index=False)
     # save off restaurants df
-    rest_path = data_path / "restaurants.csv"
+    rest_path = data_path / "Restaurants.csv"
     clean_df[REST_COLS].drop_duplicates().to_csv(rest_path, index=False)
     # save off relations df
-    rest_ins_path = data_path / "restaurantInspections.csv"
+    rest_ins_path = data_path / "RestaurantInspections.csv"
     clean_df[REST_INS_COLS].drop_duplicates().to_csv(rest_ins_path, index=False)
     # save off addresses df
-    add_path = data_path / "addresses.csv"
+    add_path = data_path / "Addresses.csv"
     clean_df[ADD_COLS].drop_duplicates().to_csv(add_path, index=False)
