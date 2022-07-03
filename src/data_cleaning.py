@@ -57,7 +57,7 @@ def clean_addresses(df: pd.DataFrame) -> pd.DataFrame:
 def create_mappings(df: pd.DataFrame) -> pd.DataFrame:
     """
     This function creates an id for a restaurant by taking the hash of the columns
-    [DBA Name, AKA Name, Facility Type]. This ensures rows with the same restaruant will
+    [DBA Name, AKA Name, Facility Type, Address, Latitude, Longitude]. This ensures rows with the same restaruant will
     have the same Id, so we are able to map between Inspection entry and Restaurant in the
     SQL tables
 
@@ -69,7 +69,14 @@ def create_mappings(df: pd.DataFrame) -> pd.DataFrame:
     """
     df["id"] = df.apply(
         lambda x: abs(
-            hash(str(x["DBA Name"]) + str(x["AKA Name"]) + str(x["Facility Type"]))
+            hash(
+                str(x["DBA Name"])
+                + str(x["AKA Name"])
+                + str(x["Facility Type"])
+                + str(x["Address"])
+                + str(x["Latitude"])
+                + str(x["Longitude"])
+            )
         ),
         axis=1,
     )
