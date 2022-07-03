@@ -1,4 +1,3 @@
-import hashlib
 import pandas as pd
 import numpy as np
 from pathlib import Path
@@ -18,7 +17,7 @@ def clean_violations(df: pd.DataFrame) -> pd.DataFrame:
     """
     # convert violations to lowercase
     mask = df["Violations"].notna()
-    df[mask, "Violations"] = df[mask, "Violations"].str.lower()
+    df.loc[mask, "Violations"] = df.loc[mask, "Violations"].str.lower()
     # create violation number column
     num_reg = r"(?:^|\| )(\d+\. )"
     vio_nums = df.loc[mask, "Violations"].str.extractall(num_reg)
@@ -35,7 +34,7 @@ def clean_violations(df: pd.DataFrame) -> pd.DataFrame:
     exp_mask = df["Violations"].notna()
     # create comment and desc violation columns
     desc_split_reg = "- comments:"
-    df.loc[exp_mask, "comment"] = (
+    df.loc[exp_mask, "comments"] = (
         df.loc[exp_mask, "vio_temp"]
         .str.split(desc_split_reg)
         .apply(lambda x: x[-1] if len(x) > 1 else np.nan)
@@ -56,11 +55,22 @@ def clean_addresses(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def create_mappings(df: pd.DataFrame) -> pd.DataFrame:
-    df["RestaurantId"] = df.apply(
+    """
+    This function creates an id for a restaurant by taking the hash of the columns
+    [DBA Name, AKA Name, Facility Type]. This ensures rows with the same restaruant will
+    have the same Id, so we are able to map between Inspection entry and Restaurant in the
+    SQL tables
+
+    Args:
+        df (pd.DataFrame): original dataframe
+
+    Returns:
+        pd.DataFrame: dataframe with Id column
+    """
+    df["Id"] = df.apply(
         lambda x: abs(
             hash(str(x["DBA Name"]) + str(x["AKA Name"]) + str(x["Facility Type"]))
-        )
-        % (10**6),
+        ),
         axis=1,
     )
     return df
@@ -89,15 +99,26 @@ if __name__ == "__main__":
     ##########################################
     # Save DFs
     ##########################################
-    INS_COLS = []
-    REST_COLS = []
-    ADD_COLS = []
+    INS_COLS = [
+        "Inspection ID",
+        "License #",
+        "Inspection Date",
+        "Inspection Type",
+        "Risk",
+        "Results",
+        "number",
+        "comments",
+        "desc",
+        "Id",
+    ]
+    REST_COLS = ["DBA Name", "AKA Name", "Facility Type", "Id"]
+    ADD_COLS = ["Address", "City", "State", "Zip", "Location", "Latitude", "Longitude"]
     # save off inspections df
     inspections_path = data_path / "inspection_table_df.csv"
-    clean_df.to_csv(inspections_path)
+    clean_df[INS_COLS].drop_duplicates().to_csv(inspections_path, index=False)
     # save off restaurants df
     rest_path = data_path / "restaurant_table_df.csv"
-    clean_df.to_csv(rest_path)
+    clean_df[REST_COLS].drop_duplicates().to_csv(rest_path, index=False)
     # save off addresses df
     add_path = data_path / "addresses_table_df.csv"
-    clean_df.to_csv(add_path)
+    clean_df[ADD_COLS].drop_duplicates().to_csv(add_path, index=False)
