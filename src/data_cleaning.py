@@ -76,6 +76,10 @@ def create_mappings(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+def rename_cols(df: pd.DataFrame) -> pd.DataFrame:
+    return df
+
+
 if __name__ == "__main__":
     ##########################################
     # import data
@@ -94,7 +98,8 @@ if __name__ == "__main__":
     # clean addresses df
     inter_df = clean_addresses(inter_df)
     # create columns for mapping between tables
-    clean_df = create_mappings(inter_df)
+    inter_df = create_mappings(inter_df)
+    clean_df = rename_cols(inter_df)
 
     ##########################################
     # Save DFs
@@ -114,11 +119,11 @@ if __name__ == "__main__":
     REST_COLS = ["DBA Name", "AKA Name", "Facility Type", "Id"]
     ADD_COLS = ["Address", "City", "State", "Zip", "Location", "Latitude", "Longitude"]
     # save off inspections df
-    inspections_path = data_path / "inspection_table_df.csv"
+    inspections_path = data_path / "inspections.csv"
     clean_df[INS_COLS].drop_duplicates().to_csv(inspections_path, index=False)
     # save off restaurants df
-    rest_path = data_path / "restaurant_table_df.csv"
+    rest_path = data_path / "restaurants.csv"
     clean_df[REST_COLS].drop_duplicates().to_csv(rest_path, index=False)
     # save off addresses df
-    add_path = data_path / "addresses_table_df.csv"
+    add_path = data_path / "addresses.csv"
     clean_df[ADD_COLS].drop_duplicates().to_csv(add_path, index=False)
