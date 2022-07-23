@@ -17,3 +17,23 @@
 4. Run `python ./src/data_cleaning.py`
 
 5. Run `python ./src/database.py`
+
+## Creating the final Zip
+
+1. collect everything from `workflow`, `notebooks`, `openRefine`, `src`, `queries`
+
+   - rename anything that is unclear
+
+2. collect the dirty data
+
+   - this is the `Food_Inspections.csv` in the `data` dir
+
+3. collect the clean data
+
+   - these are `addresses.csv`, `inspections.csv`, `RestaurantInspections.csv`, and `restaurants.csv` from `data` dir
+
+4. collect the `requirements.txt`
+
+5. create a `README.md` file that breifly explains all of the files collected
+
+6. put all these in a folder and zip it up

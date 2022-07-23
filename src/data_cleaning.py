@@ -109,19 +109,44 @@ if __name__ == "__main__":
     ##########################################
     # import data
     ##########################################
+    # @BEGIN restaurant_inspection_pipeline @desc Cleaning and Saves of Chicago Restaurant Inspections
+    # @in
+    # @out
+    # @BEGIN restaurant_inspection_import @desc To read in the data from RestaurantInspections.csv
+    # @in restaurant_data_path @ as Static_Restaruant @ desc CSV which contains restaurant inspection reviews
+    # @out restaurant_data_file @as RestaurantInspectionRead
     data_path = Path(__file__).parents[1] / "data"
     dirty_data_path = data_path / "Food_Inspections.csv"
     og_df = pd.read_csv(dirty_data_path)
+    # @end restaurant_inspection_import
 
     ##########################################
     # Clean
     ##########################################
+    # @BEGIN CleanRestaurantInspections @desc Clean columns of the restaurant inspection data
+    # @in
+    # @out
+    # @BEGIN CleanViolations
+    # @in
+    # @out
     # clean the violations
     inter_df = clean_violations(og_df)
+    # @end CleanViolations
+
+    # @BEGIN CleanRestaurants
+    # @in
+    # @out
     # clean restaurant table info
     inter_df = clean_restaurants(inter_df)
+    # @end CleanRestaurants
+
+    # @BEGIN CleanAddresses
+    # @in
+    # @out
     # clean addresses df
     inter_df = clean_addresses(inter_df)
+    # @CleanAddresses
+
     # create columns for mapping between tables
     inter_df = create_mappings(inter_df)
     clean_df = rename_cols(inter_df)
