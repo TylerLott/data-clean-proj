@@ -6,33 +6,48 @@ label="restaurant_inspection_pipeline"
 subgraph cluster_workflow { label=""; color=black; penwidth=2
 subgraph cluster_workflow_inner { label=""; color=white
 node[shape=box style="filled" fillcolor="#CCFFCC" peripheries=1 fontname=Courier]
-restaurant_inspection_import
+CleanViolations
+CleanRestaurants
+CleanAddresses
+CreateKeys
+RenameCols
+SaveInspections
+SaveRestaurants
+SaveRestaurantInspections
+SaveAddresses
 node[shape=box style="filled" fillcolor="#CCFFCC" peripheries=1 fontname=Courier]
-CleanRestaurantInspections
-SaveTableCSVs
 node[shape=box style="rounded,filled" fillcolor="#FFFFCC" peripheries=1 fontname=Helvetica]
-stuff
-RestaurantInspectionRead
-restaurant_data_path
+clean_restaurant_data_renamed
+clean_restaurant_data_w_keys
+cleaned_addresses
+cleaned_restaurants
+cleaned_violations
+restaurant_data_file
 node[shape=box style="rounded,filled" fillcolor="#FFFFFF" peripheries=1 fontname=Helvetica]
 }}
 subgraph cluster_inflows { label=""; color=white; penwidth=2
 subgraph cluster_inflows_inner { label=""; color=white
 node[shape=circle fillcolor="#FFFFFF" peripheries=1 width=0.2]
-stuff_inflow [label=""]
 }}
 subgraph cluster_outflows { label=""; color=white; penwidth=2
 subgraph cluster_outflows_inner { label=""; color=white
 node[shape=circle fillcolor="#FFFFFF" peripheries=1 width=0.2]
-stuff_outflow [label=""]
 }}
-stuff -> CleanRestaurantInspections
-stuff -> SaveTableCSVs
-restaurant_data_path -> restaurant_inspection_import
-restaurant_inspection_import -> RestaurantInspectionRead
-CleanRestaurantInspections -> stuff
-SaveTableCSVs -> stuff
-stuff_inflow -> stuff
-stuff -> stuff_outflow
+clean_restaurant_data_renamed -> SaveInspections
+clean_restaurant_data_renamed -> SaveRestaurants
+clean_restaurant_data_renamed -> SaveRestaurantInspections
+clean_restaurant_data_renamed -> SaveAddresses
+clean_restaurant_data_w_keys -> RenameCols
+cleaned_addresses -> CreateKeys
+cleaned_restaurants -> CreateKeys
+cleaned_violations -> CreateKeys
+restaurant_data_file -> CleanViolations
+restaurant_data_file -> CleanRestaurants
+restaurant_data_file -> CleanAddresses
+CleanViolations -> cleaned_violations
+CleanRestaurants -> cleaned_restaurants
+CleanAddresses -> cleaned_addresses
+CreateKeys -> clean_restaurant_data_w_keys
+RenameCols -> clean_restaurant_data_renamed
 }
 

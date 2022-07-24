@@ -5,63 +5,45 @@ extract_source(1, '..//src/data_cleaning.py').
 % FACT: annotation(annotation_id, source_id, line_number, tag, keyword, value).
 annotation(1, 1, 112, 'begin', '@BEGIN', 'restaurant_inspection_pipeline').
 annotation(2, 1, 112, 'desc', '@desc', 'Cleaning and Saves of Chicago Restaurant Inspections').
-annotation(3, 1, 113, 'in', '@in', 'stuff').
-annotation(4, 1, 114, 'out', '@out', 'stuff').
-annotation(5, 1, 115, 'begin', '@BEGIN', 'restaurant_inspection_import').
-annotation(6, 1, 115, 'desc', '@desc', 'To read in the data from RestaurantInspections.csv').
-annotation(7, 1, 116, 'in', '@in', 'restaurant_data_path').
-annotation(8, 1, 117, 'out', '@out', 'restaurant_data_file').
-annotation(9, 1, 117, 'as', '@as', 'RestaurantInspectionRead').
-annotation(10, 1, 121, 'end', '@end', 'restaurant_inspection_import').
-annotation(11, 1, 126, 'begin', '@BEGIN', 'CleanRestaurantInspections').
-annotation(12, 1, 126, 'desc', '@desc', 'Clean columns of the restaurant inspection data').
-annotation(13, 1, 127, 'in', '@in', 'stuff').
-annotation(14, 1, 128, 'out', '@out', 'stuff').
-annotation(15, 1, 129, 'begin', '@BEGIN', 'CleanViolations').
-annotation(16, 1, 130, 'in', '@in', 'stuff').
-annotation(17, 1, 131, 'out', '@out', 'stuff').
-annotation(18, 1, 134, 'end', '@end', 'CleanViolations').
-annotation(19, 1, 136, 'begin', '@BEGIN', 'CleanRestaurants').
-annotation(20, 1, 137, 'in', '@in', 'stuff').
-annotation(21, 1, 138, 'out', '@out', 'stuff').
-annotation(22, 1, 141, 'end', '@end', 'CleanRestaurants').
-annotation(23, 1, 143, 'begin', '@BEGIN', 'CleanAddresses').
-annotation(24, 1, 144, 'in', '@in', 'stuff').
-annotation(25, 1, 145, 'out', '@out', 'stuff').
-annotation(26, 1, 148, 'end', '@end', 'CleanAddresses').
-annotation(27, 1, 150, 'begin', '@BEGIN', 'CreateKeys').
-annotation(28, 1, 151, 'in', '@in', 'stuff').
-annotation(29, 1, 152, 'out', '@out', 'stuff').
-annotation(30, 1, 155, 'end', '@end', 'CreateKeys').
-annotation(31, 1, 157, 'begin', '@Begin', 'RenameCols').
-annotation(32, 1, 158, 'in', '@in', 'stuff').
-annotation(33, 1, 159, 'out', '@out', 'stuff').
-annotation(34, 1, 161, 'end', '@end', 'RenameCols').
-annotation(35, 1, 163, 'end', '@end', 'CleanRestaurantInspections').
-annotation(36, 1, 168, 'begin', '@BEGIN', 'SaveTableCSVs').
-annotation(37, 1, 169, 'in', '@in', 'stuff').
-annotation(38, 1, 170, 'out', '@out', 'stuff').
-annotation(39, 1, 185, 'begin', '@BEGIN', 'SaveInspections').
-annotation(40, 1, 186, 'in', '@in', 'stuff').
-annotation(41, 1, 187, 'out', '@out', 'stuff').
-annotation(42, 1, 191, 'end', '@end', 'SaveInspections').
-annotation(43, 1, 193, 'begin', '@BEGIN', 'SaveRestaurants').
-annotation(44, 1, 194, 'in', '@in', 'stuff').
-annotation(45, 1, 195, 'out', '@out', 'stuff').
-annotation(46, 1, 199, 'end', '@end', 'SaveRestaurants').
-annotation(47, 1, 201, 'begin', '@BEGIN', 'SaveRestaurantInspections').
-annotation(48, 1, 202, 'in', '@in', 'stuff').
-annotation(49, 1, 203, 'out', '@out', 'stuff').
-annotation(50, 1, 207, 'end', '@end', 'SaveRestaurantInspections').
-annotation(51, 1, 209, 'begin', '@BEGIN', 'SaveAddresses').
-annotation(52, 1, 210, 'in', '@in', 'stuff').
-annotation(53, 1, 211, 'out', '@out', 'stuff').
-annotation(54, 1, 215, 'end', '@end', 'SaveAddresses').
-annotation(55, 1, 217, 'end', '@end', 'SaveTableCSVs').
-annotation(56, 1, 218, 'end', '@end', 'restaurant_inspection_pipeline').
+annotation(3, 1, 113, 'in', '@in', 'restaurant_data_path').
+annotation(4, 1, 114, 'out', '@out', 'restaurant_data_file').
+annotation(5, 1, 114, 'as', '@as', 'RestaurantInspectionRead').
+annotation(6, 1, 122, 'begin', '@BEGIN', 'CleanViolations').
+annotation(7, 1, 123, 'in', '@in', 'restaurant_data_file').
+annotation(8, 1, 124, 'out', '@out', 'cleaned_violations').
+annotation(9, 1, 127, 'end', '@end', 'CleanViolations').
+annotation(10, 1, 129, 'begin', '@BEGIN', 'CleanRestaurants').
+annotation(11, 1, 130, 'in', '@in', 'restaurant_data_file').
+annotation(12, 1, 131, 'out', '@out', 'cleaned_restaurants').
+annotation(13, 1, 134, 'end', '@end', 'CleanRestaurants').
+annotation(14, 1, 136, 'begin', '@BEGIN', 'CleanAddresses').
+annotation(15, 1, 137, 'in', '@in', 'restaurant_data_file').
+annotation(16, 1, 138, 'out', '@out', 'cleaned_addresses').
+annotation(17, 1, 141, 'end', '@end', 'CleanAddresses').
+annotation(18, 1, 143, 'begin', '@BEGIN', 'CreateKeys').
+annotation(19, 1, 144, 'in', '@in', 'cleaned_violations').
+annotation(20, 1, 145, 'in', '@in', 'cleaned_restaurants').
+annotation(21, 1, 146, 'in', '@in', 'cleaned_addresses').
+annotation(22, 1, 147, 'out', '@out', 'clean_restaurant_data_w_keys').
+annotation(23, 1, 150, 'end', '@end', 'CreateKeys').
+annotation(24, 1, 152, 'begin', '@Begin', 'RenameCols').
+annotation(25, 1, 153, 'in', '@in', 'clean_restaurant_data_w_keys').
+annotation(26, 1, 154, 'out', '@out', 'clean_restaurant_data_renamed').
+annotation(27, 1, 156, 'end', '@end', 'RenameCols').
+annotation(28, 1, 175, 'begin', '@BEGIN', 'SaveInspections').
+annotation(29, 1, 176, 'in', '@in', 'clean_restaurant_data_renamed').
+annotation(30, 1, 180, 'end', '@end', 'SaveInspections').
+annotation(31, 1, 182, 'begin', '@BEGIN', 'SaveRestaurants').
+annotation(32, 1, 183, 'in', '@in', 'clean_restaurant_data_renamed').
+annotation(33, 1, 187, 'end', '@end', 'SaveRestaurants').
+annotation(34, 1, 189, 'begin', '@BEGIN', 'SaveRestaurantInspections').
+annotation(35, 1, 190, 'in', '@in', 'clean_restaurant_data_renamed').
+annotation(36, 1, 194, 'end', '@end', 'SaveRestaurantInspections').
+annotation(37, 1, 196, 'begin', '@BEGIN', 'SaveAddresses').
+annotation(38, 1, 197, 'in', '@in', 'clean_restaurant_data_renamed').
+annotation(39, 1, 201, 'end', '@end', 'SaveAddresses').
+annotation(40, 1, 203, 'end', '@end', 'restaurant_inspection_pipeline').
 
 % FACT: annotation_qualifies(qualifying_annotation_id, primary_annotation_id).
 annotation_qualifies(2, 1).
-annotation_qualifies(6, 5).
-annotation_qualifies(9, 8).
-annotation_qualifies(12, 11).
+annotation_qualifies(5, 4).
