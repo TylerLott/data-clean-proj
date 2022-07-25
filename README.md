@@ -2,6 +2,8 @@
 
 ## Getting Started
 
+### For Windows
+
 1. Get the dataset from [THIS KAGGLE LINK](https://www.kaggle.com/datasets/chicago/chi-restaurant-inspections), place the file in the data folder.
 
 2. Ensure you have python 3.10 (you can probably use a lower version too)
@@ -13,6 +15,24 @@
    `./python_env/Scripts/activate`
 
    `python -m pip install -r requirements.txt`
+
+4. Run `python ./src/data_cleaning.py`
+
+5. Run `python ./src/database.py`
+
+### For Mac
+
+1. Get the dataset from [THIS KAGGLE LINK](https://www.kaggle.com/datasets/chicago/chi-restaurant-inspections), place the file in the data folder.
+
+2. Ensure you have python 3.10 (you can probably use a lower version too)
+
+3. run the following commands to set up the venv
+
+   `python3.10 -m venv python_env`
+
+   `source ./python_env/bin/activate`
+
+   `python3.10 -m pip install -r requirements-mac.txt`
 
 4. Run `python ./src/data_cleaning.py`
 
