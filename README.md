@@ -34,9 +34,9 @@
 
    `python3.10 -m pip install -r requirements-mac.txt`
 
-4. Run `python ./src/data_cleaning.py`
+4. Run `python3.10 ./src/data_cleaning.py`
 
-5. Run `python ./src/database.py`
+5. Run `python3.10 ./src/database.py`
 
 ## Creating the final Zip
 
