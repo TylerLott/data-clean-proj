@@ -2,13 +2,13 @@
 
 ## Getting Started
 
-### For Windows
+### Setting Up Python Environment
 
-1. Get the dataset from [THIS KAGGLE LINK](https://www.kaggle.com/datasets/chicago/chi-restaurant-inspections), place the file in the data folder.
+Ensure you have python 3.10 (you can probably use a lower version too)
 
-2. Ensure you have python 3.10 (you can probably use a lower version too)
+#### For Windows
 
-3. run the following commands to set up the venv
+1. Run the following commands to set up the venv:
 
    `python -m venv python_env`
 
@@ -16,27 +16,27 @@
 
    `python -m pip install -r requirements.txt`
 
-4. Run `python ./src/data_cleaning.py`
+#### For Mac
 
-5. Run `python ./src/database.py`
-
-### For Mac
-
-1. Get the dataset from [THIS KAGGLE LINK](https://www.kaggle.com/datasets/chicago/chi-restaurant-inspections), place the file in the data folder.
-
-2. Ensure you have python 3.10 (you can probably use a lower version too)
-
-3. run the following commands to set up the venv
+1. Run the following commands to set up the venv:
 
    `python3.10 -m venv python_env`
 
    `source ./python_env/bin/activate`
 
+   `./python_env/bin/python3.10 -m pip install --upgrade pip`
+
    `python3.10 -m pip install -r requirements-mac.txt`
 
-4. Run `python3.10 ./src/data_cleaning.py`
+### Setting Up Project
 
-5. Run `python3.10 ./src/database.py`
+1. Download the dataset `Inspections.csv` from our team's [Box](https://uofi.app.box.com/folder/166723381455) account.
+
+2. Place the downloaded dataset in the data folder.
+
+2. Run `python3.10 ./src/data_cleaning.py`
+
+3. Run `python3.10 ./src/database.py`
 
 ## Creating the final Zip
 
