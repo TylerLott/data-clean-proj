@@ -69,7 +69,7 @@ def create_mappings(df: pd.DataFrame) -> pd.DataFrame:
     """
     df["estID"] = df.apply(
         lambda x: abs(
-            hash( str(x["AKA Name"])
+            hash( str(x["DBA Name"])
                 + str(x["Latitude"])
                 + str(x["Longitude"])
             )
@@ -81,7 +81,7 @@ def create_mappings(df: pd.DataFrame) -> pd.DataFrame:
 
 def rename_cols(df: pd.DataFrame) -> pd.DataFrame:
     cols = {
-            "AKA Name"          : "estName",
+            "DBA Name"          : "estName",
             "Inspection ID"     : "inspectionID",
             "Results"           : "results",
            }
@@ -100,7 +100,7 @@ if __name__ == "__main__":
     # @in restaurant_data_path @ as Static_Restaruant @ desc CSV which contains restaurant inspection reviews
     # @out restaurant_data_file @as RestaurantInspectionRead
     data_path = Path(__file__).parents[1] / "data"
-    dirty_data_path = data_path / "Food_Inspections.csv"
+    dirty_data_path = data_path / "Cleaned_Inspections.csv"
     og_df = pd.read_csv(dirty_data_path)
     # @end restaurant_inspection_import
 
