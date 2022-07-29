@@ -26,7 +26,7 @@ Ensure you have python 3.10 (you can probably use a lower version too)
 
    `./python_env/bin/python3.10 -m pip install --upgrade pip`
 
-   `python3.10 -m pip install -r requirements-mac.txt`
+   `python -m pip install -r requirements-mac.txt`
 
 ### Setting Up Project
 
@@ -34,9 +34,9 @@ Ensure you have python 3.10 (you can probably use a lower version too)
 
 2. Place the downloaded dataset in the data folder.
 
-2. Run `python3.10 ./src/data_cleaning.py`
+2. Run `python ./src/data_cleaning.py`
 
-3. Run `python3.10 ./src/database.py`
+3. Run `python ./src/database.py`
 
 ## Creating the final Zip
 

@@ -6,7 +6,7 @@ from pathlib import Path
 def clean_violations(df: pd.DataFrame) -> pd.DataFrame:
     """
     This function cleans the 'Violations' columns of the main df. It splits the information out
-    into 3 different columns ['number', 'comment', 'desc']. It also splits violations into
+    into 3 different columns ['number', 'comment', 'description']. It also splits violations into
     their own distinct rows
 
     Args:
@@ -32,14 +32,14 @@ def clean_violations(df: pd.DataFrame) -> pd.DataFrame:
     # split into individual rows for violations
     df = df.explode(["vio_temp", "number"]).reset_index(drop=True)
     exp_mask = df["Violations"].notna()
-    # create comment and desc violation columns
+    # create comment and description violation columns
     desc_split_reg = "- comments:"
     df.loc[exp_mask, "comments"] = (
         df.loc[exp_mask, "vio_temp"]
         .str.split(desc_split_reg)
         .apply(lambda x: x[-1] if len(x) > 1 else np.nan)
     )
-    df.loc[exp_mask, "desc"] = (
+    df.loc[exp_mask, "description"] = (
         df.loc[exp_mask, "vio_temp"].str.split(desc_split_reg).apply(lambda x: x[0])
     )
     df = df.drop(columns=["vio_temp", "Violations"])
@@ -49,15 +49,11 @@ def clean_violations(df: pd.DataFrame) -> pd.DataFrame:
 def clean_establishments(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
-# TODO: Remove this method. We are not using addresses
-def clean_addresses(df: pd.DataFrame) -> pd.DataFrame:
-    return df
-
 
 def create_mappings(df: pd.DataFrame) -> pd.DataFrame:
     """
     This function creates an id for a restaurant by taking the hash of the columns
-    [AKA Name, Latitude, Longitude]. This ensures rows with the same restaruant will
+    [DBA Name, Latitude, Longitude]. This ensures rows with the same restaruant will
     have the same Id, so we are able to map between Inspection entry and Restaurant in the
     SQL tables
 
@@ -82,8 +78,8 @@ def create_mappings(df: pd.DataFrame) -> pd.DataFrame:
 def rename_cols(df: pd.DataFrame) -> pd.DataFrame:
     cols = {
             "DBA Name"          : "estName",
-            "Inspection ID"     : "inspectionID",
-            "Results"           : "results",
+            "Inspection ID"     : "inspecID",
+            "Results"           : "result",
            }
 
     return df.rename(columns=cols)
@@ -93,11 +89,11 @@ if __name__ == "__main__":
     ##########################################
     # import data
     ##########################################
-    # @BEGIN restaurant_inspection_pipeline @desc Cleaning and Saves of Chicago Restaurant Inspections
+    # @BEGIN restaurant_inspection_pipeline @description Cleaning and Saves of Chicago Restaurant Inspections
     # @in
     # @out
-    # @BEGIN restaurant_inspection_import @desc To read in the data from RestaurantInspections.csv
-    # @in restaurant_data_path @ as Static_Restaruant @ desc CSV which contains restaurant inspection reviews
+    # @BEGIN restaurant_inspection_import @description To read in the data from RestaurantInspections.csv
+    # @in restaurant_data_path @as Static_Restaruant @description CSV which contains restaurant inspection reviews
     # @out restaurant_data_file @as RestaurantInspectionRead
     data_path = Path(__file__).parents[1] / "data"
     dirty_data_path = data_path / "Cleaned_Inspections.csv"
@@ -107,7 +103,7 @@ if __name__ == "__main__":
     ##########################################
     # Clean
     ##########################################
-    # @BEGIN CleanRestaurantInspections @desc Clean columns of the restaurant inspection data
+    # @BEGIN CleanRestaurantInspections @description Clean columns of the restaurant inspection data
     # @in
     # @out
     # @BEGIN CleanViolations
@@ -124,14 +120,6 @@ if __name__ == "__main__":
     inter_df = clean_establishments(inter_df)
     # @end CleanRestaurants
 
-    # @BEGIN CleanAddresses
-    # @in
-    # @out
-    # clean addresses df
-    # TODO: remove/ not using addresses
-    # inter_df = clean_addresses(inter_df)
-    # @CleanAddresses
-
     # create columns for mapping between tables
     inter_df = create_mappings(inter_df)
     clean_df = rename_cols(inter_df)
@@ -141,7 +129,7 @@ if __name__ == "__main__":
     ##########################################
 
     # inspection table's columns
-    INS_COLS = ["inspectionID", "results", "number", "comments", "desc"]
+    INS_COLS = ["inspecID", "result", "number", "comments", "description"]
     # save off inspections df
     inspections_path = data_path / "Inspections.csv"
     clean_df[INS_COLS].drop_duplicates().to_csv(inspections_path, index=False)
@@ -149,13 +137,14 @@ if __name__ == "__main__":
     # establishment table's columns
     EST_COLS = ["estID", "estName"]
     # save off restaurants df
-    rest_path = data_path / "Establishments.csv"
-    clean_df[EST_COLS].drop_duplicates().to_csv(rest_path, index=False)
+    est_path = data_path / "Establishments.csv"
+    clean_df[EST_COLS].drop_duplicates().to_csv(est_path, index=False)
     
     # establishment's inspections table's coulmns
-    EST_INS_COLS = ["estID", "inspectionID"]
+    EST_INS_COLS = ["estID", "inspecID"]
     # save off relations df
-    rest_ins_path = data_path / "EstablishmentInspections.csv"
-    clean_df[EST_INS_COLS].drop_duplicates().to_csv(rest_ins_path, index=False)
+    est_ins_path = data_path / "EstablishmentInspections.csv"
+    clean_df[EST_INS_COLS].drop_duplicates().to_csv(est_ins_path, index=False)
 
-
+    # convert "number" column to numeric
+    clean_df["number"] = pd.to_numeric(clean_df["number"])
