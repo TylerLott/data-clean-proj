@@ -30,13 +30,21 @@ Ensure you have python 3.10 (you can probably use a lower version too)
 
 ### Setting Up Project
 
-1. Download the dataset `Inspections.csv` from our team's [Box](https://uofi.app.box.com/folder/166723381455) account.
+#### For Dirty Data
+1. Download the dataset `Food_Inspections.csv` from our team's [Box](https://uofi.app.box.com/folder/166723381455) account.
 
-2. Place the downloaded dataset in the data folder.
+2. Place the downloaded dataset in the `./data/dirty_data` folder.
 
-2. Run `python ./src/data_cleaning.py`
+3. Run `python ./src/dirty/dirty_database.py`
 
-3. Run `python ./src/database.py`
+#### For Clean Data
+1. Download the dataset `Open_Refine_Inspections.csv` from our team's [Box](https://uofi.app.box.com/folder/166723381455) account.
+
+2. Place the downloaded dataset in the `./data/clean_data` folder.
+
+3. Run `python ./src/clean/data_cleaning.py`
+
+4. Run `python ./src/clean/database.py`
 
 ## Creating the final Zip
 
