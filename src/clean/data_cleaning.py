@@ -95,8 +95,8 @@ if __name__ == "__main__":
     # @BEGIN restaurant_inspection_import @description To read in the data from RestaurantInspections.csv
     # @in restaurant_data_path @as Static_Restaruant @description CSV which contains restaurant inspection reviews
     # @out restaurant_data_file @as RestaurantInspectionRead
-    data_path = Path(__file__).parents[1] / "data"
-    dirty_data_path = data_path / "Cleaned_Inspections.csv"
+    data_path = Path(__file__).parents[2] / "data/clean_data"
+    dirty_data_path = data_path / "Open_Refine_Inspections.csv"
     og_df = pd.read_csv(dirty_data_path)
     # @end restaurant_inspection_import
 
@@ -125,7 +125,7 @@ if __name__ == "__main__":
     clean_df = rename_cols(inter_df)
 
     ##########################################
-    # Save DFs
+    # Save DataFrames
     ##########################################
 
     # inspection table's columns

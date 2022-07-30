@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 if __name__ == "__main__":
-    data_path = Path(__file__).parents[1] / "data"
+    data_path = Path(__file__).parents[2] / "data/clean_data"
     # Create database
     db_path = data_path / "food_inspections.db"
     with sqlite3.connect(db_path) as con:
