@@ -55089,5 +55089,125 @@
       }
     ],
     "description": "Mass edit cells in column DBA Name"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "DBA Name",
+          "columnName": "DBA Name",
+          "query": "subway",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "DBA Name",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "MADISON SUBWAY LLC"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "SUBWAY"
+      }
+    ],
+    "description": "Mass edit cells in column DBA Name"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "DBA Name",
+          "columnName": "DBA Name",
+          "query": "subway",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "DBA Name",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "LALO SUBWAY INC"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "SUBWAY"
+      }
+    ],
+    "description": "Mass edit cells in column DBA Name"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "DBA Name",
+          "columnName": "DBA Name",
+          "query": "walgreen",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "DBA Name",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "WALGREEN"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "WALGREENS"
+      }
+    ],
+    "description": "Mass edit cells in column DBA Name"
+  },
+  {
+    "op": "core/mass-edit",
+    "engineConfig": {
+      "facets": [
+        {
+          "type": "text",
+          "name": "DBA Name",
+          "columnName": "DBA Name",
+          "query": "McDonald",
+          "mode": "text",
+          "caseSensitive": false,
+          "invert": false
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "DBA Name",
+    "expression": "value",
+    "edits": [
+      {
+        "from": [
+          "SARAH MCDONALD STEELE"
+        ],
+        "fromBlank": false,
+        "fromError": false,
+        "to": "MCDONALD'S"
+      }
+    ],
+    "description": "Mass edit cells in column DBA Name"
   }
 ]
