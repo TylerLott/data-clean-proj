@@ -46,22 +46,53 @@ Ensure you have python 3.10 (you can probably use a lower version too)
 
 4. Run `python ./src/clean/database.py`
 
-## Creating the final Zip
+## Final Submission
 
-1. collect everything from `workflow`, `notebooks`, `openRefine`, `src`, `queries`
+### Zip File
 
-   - rename anything that is unclear
+1. Workflow Model
+   - [ ] `Workflow.yw`  
+   - [ ] `Workflow.gv`  
+   <BR>
 
-2. collect the dirty data
+2. OpenRefine
+   - [ ] `OpenRefineHistory.json`
+   - [ ] `OR2YW.yw`  
+   <BR>
 
-   - this is the `Food_Inspections.csv` in the `data` dir
+3. Other Datacleaning Tools
+   - [ ] `data_cleaning.py`
+   - [ ] `notebooks/db_cleaning_exploration.ipynb`
+   <BR>
 
-3. collect the clean data
+4. Queries
+   - [ ] `notebooks/db_queries.ipynb`  
+   <BR>
 
-   - these are `addresses.csv`, `inspections.csv`, `RestaurantInspections.csv`, and `restaurants.csv` from `data` dir
+5. External links
+   - [ ] `DataLinks.txt`
+      - [ ] dirty data [Food_Inspections.csv](https://uofi.app.box.com/folder/166723381455)
+      - [ ] clean data
+         - `EstablishmentInspections.csv`
+         - `Establishment.csv`
+         - `Inspections.csv`
+      - [ ] [GitHub](https://github.com/TylerLott/data-clean-proj)  
+      <BR>
 
-4. collect the `requirements.txt`
+6. README
+   - [ ] create a `README.md` that explains the contents files in the zip folder  
+   <BR>
 
-5. create a `README.md` file that breifly explains all of the files collected
+### Box Folder
 
-6. put all these in a folder and zip it up
+The follwoing files need to be in the box folder:
+
+   * `Food_Inspections.csv`
+
+   * `EstablishmentInspections.csv`
+
+   * `Establishment.csv`
+
+   * `Inspections.csv`
+
+   
