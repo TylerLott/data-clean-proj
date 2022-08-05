@@ -35,9 +35,9 @@
     * includes queries to support use case
 
 ### **`Workflow`**
-* `make.sh` and `settings.sh`
-    * bash scripts for workflow
+* `workflow.drawio`
+    * src workflow diagram
 * `results`
-    * produced workflow items
+    * collection of all workflow diagrams
 
 
