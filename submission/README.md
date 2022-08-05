@@ -33,4 +33,10 @@
     * includes link to GitHub
 
 
+### **`Workflow`**
+* `make.sh` and `settings.sh`
+    * bash scripts for workflow
+* `results`
+    * produced workflow items
+
 

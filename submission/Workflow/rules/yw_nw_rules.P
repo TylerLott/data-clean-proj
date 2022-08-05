@@ -1,0 +1,145 @@
+
+line_inside_range(Line, RangeStart, RangeEnd) :-
+    Line >= RangeStart,
+    Line =< RangeEnd.
+
+line_outside_range(Line, RangeStart, _) :-
+    Line < RangeStart.
+line_outside_range(Line, _, RangeEnd) :-
+    Line > RangeEnd.
+
+:- table data_values_upstream_of_data_product/9.
+data_values_upstream_of_data_product(DownstreamDataId, DataId, DataName, VarId, VarName, VarValue, ProductVarId, ProductVarName, ProductVarValue) :-
+    nw_dependency(_, VarId, VarName, VarValue, _, ProductVarId, ProductVarName, ProductVarValue),
+    nw_variable_for_yw_data(VarId, _, _, DataId, DataName),
+    yw_data_downstream(DataId, DownstreamDataId).
+
+data_values_upstream_of_data_product_9 :-
+    printall(data_values_upstream_of_data_product(_,_,_,_,_,_,_,_,_)).
+
+
+:- table nw_variable_in_yw_lineage_of_nw_variable/11.
+nw_variable_in_yw_lineage_of_nw_variable(Why, DataId, DataName, VarId, VarName, Value, DownstreamDataId, DownstreamDataName, DownstreamVarId, DownstreamVarName, DownstreamVarValue) :-
+    nw_variable_in_yw_lineage_of_nw_variable(Why, DataId, VarId, DownstreamDataId, DownstreamVarId),
+    yw_data(DataId, DataName, _, _),
+    nw_variable_assignment(_, VarId, VarName, _, Value),
+    yw_data(DownstreamDataId, DownstreamDataName, _, _),
+    nw_variable_assignment(_, DownstreamVarId, DownstreamVarName, _, DownstreamVarValue).
+
+nw_variable_in_yw_lineage_of_nw_variable_11 :-
+    writeln('nw_variable_in_yw_lineage_of_nw_variable(Why, DataId, DataName, VarId, VarName, Value, DownstreamDataId, DownstreamDataName, DownstreamVarId, DownstreamVarName, DownstreamVarValue).'),
+    printall(nw_variable_in_yw_lineage_of_nw_variable(_,_,_,_,_,_,_,_,_,_,_)).
+
+:- table nw_variable_in_yw_lineage_of_nw_variable/5.
+nw_variable_in_yw_lineage_of_nw_variable(Why, DataId, VarId, DownstreamDataId, DownstreamVarId) :-
+    nw_variable_for_yw_data(VarId, _, _, DataId, _),
+    DataId = DownstreamDataId,
+    VarId = DownstreamVarId,
+    Why = yw_identity_nw_identity.
+nw_variable_in_yw_lineage_of_nw_variable(Why, DataId, VarId, DownstreamDataId, DownstreamVarId) :-
+    nw_variable_for_yw_data(VarId, _, _, DataId, _),
+    nw_variable_for_yw_data(DownstreamVarId, _, _, DownstreamDataId, _),
+    yw_data_downstream(DataId, DownstreamDataId),
+    VarId = DownstreamVarId,
+    DataId \== DownstreamDataId,
+    Why = yw_lineage_nw_identity.
+nw_variable_in_yw_lineage_of_nw_variable(Why, DataId, VarId, DownstreamDataId, DownstreamVarId) :-
+    nw_variable_for_yw_data(VarId, _, _, DataId, _),
+    nw_variable_for_yw_data(DownstreamVarId, _, _, DownstreamDataId, _),
+    yw_data_downstream(DataId, DownstreamDataId),
+    nw_variable_upstream_of_variable(VarId, DownstreamVarId),
+    VarId \= DownstreamVarId,
+    DataId \== DownstreamDataId,
+    Why = lineage.
+
+nw_variable_in_yw_lineage_of_nw_variable_5 :-
+    writeln('nw_variable_in_yw_lineage_of_nw_variable(Why, DataId, VarId, DownstreamDataId, DownstreamVarId).'),
+    printall(nw_variable_in_yw_lineage_of_nw_variable(_,_,_,_,_)).
+
+nw_variable_assigned_in_yw_step(VariableId, VariableName, VariableValue, StepId, StepName, AssignmentLine) :-
+    yw_workflow_step(StepId, StepName,_,_, StepBeginLine, StepEndLine),
+    nw_variable_assignment(_, VariableId, VariableName, AssignmentLine, VariableValue),
+    line_inside_range(AssignmentLine, StepBeginLine, StepEndLine).
+
+nw_variable_assigned_outside_yw_step(VariableId, VariableName, VariableValue, StepId, StepName, AssignmentLine) :-
+    yw_workflow_step(StepId, StepName,_,_, StepBeginLine, StepEndLine),
+    nw_variable_assignment(_, VariableId, VariableName, AssignmentLine, VariableValue),
+    line_outside_range(AssignmentLine, StepBeginLine, StepEndLine).
+
+nw_variable_used_in_yw_step(VariableId, VariableName, VariableValue, StepId, StepName, UsageLine) :-
+    yw_workflow_step(StepId, StepName,_,_, StepBeginLine, StepEndLine),
+    nw_variable_usage(_, _, VariableId, VariableName, VariableValue, UsageLine),
+    line_inside_range(UsageLine, StepBeginLine, StepEndLine).
+
+nw_variable_used_outside_yw_step(VariableId, VariableName, VariableValue, StepId, StepName, UsageLine) :-
+    yw_workflow_step(StepId, StepName,_,_, StepBeginLine, StepEndLine),
+    nw_variable_usage(_, _, VariableId, VariableName, VariableValue, UsageLine),
+    line_outside_range(UsageLine, StepBeginLine, StepEndLine).
+
+% Variables assigned outside, then used inside, the step with the given input port.
+:- table nw_variable_for_yw_in_port/9.
+nw_variable_for_yw_in_port(VariableId, VariableName, VariableValue, DataId, DataName, PortId, PortName, StepId, StepName) :-
+    PortName = VariableName,
+    yw_step_input(StepId, StepName, _, PortId, PortName, DataId, DataName),
+    nw_variable_used_in_yw_step(VariableId, VariableName, VariableValue, StepId, _, _),
+    nw_variable_assigned_outside_yw_step(VariableId, _, _, StepId, _, _).
+
+nw_variable_for_yw_in_port_defined(VariableId, VariableName, VariableValue, DataId, DataName, PortId, PortName, StepId, StepName) :-
+    PortName = VariableName,
+    yw_step_input(StepId, StepName, _, PortId, PortName, DataId, DataName),
+    nw_variable_assigned_in_yw_step(VariableId, VariableName, VariableValue, StepId, _, _),
+    not nw_variable_assigned_outside_yw_step(_, VariableName, _, StepId, _, _),
+    not nw_argument_for_yw_in_port(_, VariableName, _, _, _, _, _, StepId, _).
+
+nw_variable_for_yw_in_port_defined_9 :-
+    printall(nw_variable_for_yw_in_port_defined(_,_,_,_,_,_,_,_,_)).
+
+% Variables assigned as arguments in function calls into the step from outside the step.
+:- table nw_argument_for_yw_in_port/9.
+nw_argument_for_yw_in_port(VarId, VarName, VarValue, DataId, DataName, PortId, PortName, StepId, StepName) :-
+    yw_step_input(StepId, StepName, _, PortId, PortName, DataId, DataName),
+    yw_program(StepId, _, _, _, StepBeginLine, StepEndLine),
+    VarName = PortName,
+    nw_function_argument(ActId, _, VarId, _, _, _, _, _),
+
+    nw_variable_assignment(ActId, VarId, VarName, AssignmentLine, VarValue),
+    line_inside_range(AssignmentLine, StepBeginLine, StepEndLine),
+
+    not nw_variable_for_yw_in_port(VarId, _, _, _, _, PortId, _, _, _),
+    nw_function_activation(ActId, _, _, CallLine, _),
+    line_outside_range(CallLine, StepBeginLine, StepEndLine).
+
+nw_argument_for_yw_in_port_9 :-
+    printall(nw_argument_for_yw_in_port(_,_,_,_,_,_,_,_,_)).
+
+% Inflow variables corresponding to inflows on containing workflow.
+:- table nw_variable_for_yw_inflow/9.
+nw_variable_for_yw_inflow(VariableId, VariableName, VariableValue, WorkflowInDataId, WorkflowInDataName, WorkflowPortId, WorkflowPortName, WorkflowId, WorkflowName) :-
+    nw_argument_for_yw_in_port(VariableId, VariableName, VariableValue, StepInDataId, StepInDataName, _, _, StepId, StepName),
+    yw_inflow(WorkflowId, WorkflowName, StepInDataId, StepInDataName, StepId, StepName),
+    WorkflowInDataName = StepInDataName,
+    yw_step_input(WorkflowId, WorkflowName, _, WorkflowPortId, WorkflowPortName, WorkflowInDataId, WorkflowInDataName).
+
+% Output variables assigned inside the step then used outside the step.
+:- table nw_variable_for_yw_out_port_assigned/9.
+nw_variable_for_yw_out_port_assigned(VariableId, VariableName, VariableValue, DataId, DataName, PortId, PortName, StepId, StepName) :-
+    yw_step_output(StepId, _, _, PortId, PortName, DataId, DataName),
+    PortName = VariableName,
+    nw_variable_assigned_in_yw_step(VariableId, VariableName, VariableValue, StepId, StepName, _),
+    nw_variable_used_outside_yw_step(VariableId, _, _, StepId, _, _).
+
+% Output variables that are input variables with names matching outputs and no matching assignments in step.
+:- table nw_variable_for_yw_out_port_thru/9.
+nw_variable_for_yw_out_port_thru(VariableId, VariableName, VariableValue, DataId, DataName, PortId, PortName, StepId, StepName) :-
+    PortName = VariableName,
+    yw_step_output(StepId, StepName, _, PortId, PortName, DataId, DataName),
+    nw_variable_for_yw_in_port(VariableId, VariableName, VariableValue, _, _, _, _, _, StepId, _),
+    not nw_variable_assigned_in_yw_step(_, VariableName, _, StepId, _, _).
+
+% Output variables corresponding to outflows on containing workflow.
+:- table nw_variable_for_yw_outflow/9.
+nw_variable_for_yw_outflow(VariableId, VariableName, VariableValue, WorkflowOutDataId, WorkflowOutDataName, WorkflowPortId, WorkflowPortName, WorkflowId, WorkflowName) :-
+    nw_variable_for_yw_out_port_thru(VariableId, VariableName, VariableValue, StepOutDataId, StepOutDataName, _, _, StepId, _),
+    WorkflowOutDataName = StepOutDataName,
+    yw_outflow(StepId, _, StepOutDataId, StepOutDataName, WorkflowId, WorkflowName, WorkflowOutDataId, WorkflowOutDataName),
+    yw_step_output(WorkflowId, _, out, WorkflowPortId, WorkflowPortName, WorkflowOutDataId, _).

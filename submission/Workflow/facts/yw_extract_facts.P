@@ -1,0 +1,49 @@
+
+% FACT: extract_source(source_id, source_path).
+extract_source(1, '..//src/data_cleaning.py').
+
+% FACT: annotation(annotation_id, source_id, line_number, tag, keyword, value).
+annotation(1, 1, 112, 'begin', '@BEGIN', 'restaurant_inspection_pipeline').
+annotation(2, 1, 112, 'desc', '@desc', 'Cleaning and Saves of Chicago Restaurant Inspections').
+annotation(3, 1, 113, 'in', '@in', 'restaurant_data_path').
+annotation(4, 1, 114, 'out', '@out', 'restaurant_data_file').
+annotation(5, 1, 114, 'as', '@as', 'RestaurantInspectionRead').
+annotation(6, 1, 122, 'begin', '@BEGIN', 'CleanViolations').
+annotation(7, 1, 123, 'in', '@in', 'restaurant_data_file').
+annotation(8, 1, 124, 'out', '@out', 'cleaned_violations').
+annotation(9, 1, 127, 'end', '@end', 'CleanViolations').
+annotation(10, 1, 129, 'begin', '@BEGIN', 'CleanRestaurants').
+annotation(11, 1, 130, 'in', '@in', 'restaurant_data_file').
+annotation(12, 1, 131, 'out', '@out', 'cleaned_restaurants').
+annotation(13, 1, 134, 'end', '@end', 'CleanRestaurants').
+annotation(14, 1, 136, 'begin', '@BEGIN', 'CleanAddresses').
+annotation(15, 1, 137, 'in', '@in', 'restaurant_data_file').
+annotation(16, 1, 138, 'out', '@out', 'cleaned_addresses').
+annotation(17, 1, 141, 'end', '@end', 'CleanAddresses').
+annotation(18, 1, 143, 'begin', '@BEGIN', 'CreateKeys').
+annotation(19, 1, 144, 'in', '@in', 'cleaned_violations').
+annotation(20, 1, 145, 'in', '@in', 'cleaned_restaurants').
+annotation(21, 1, 146, 'in', '@in', 'cleaned_addresses').
+annotation(22, 1, 147, 'out', '@out', 'clean_restaurant_data_w_keys').
+annotation(23, 1, 150, 'end', '@end', 'CreateKeys').
+annotation(24, 1, 152, 'begin', '@Begin', 'RenameCols').
+annotation(25, 1, 153, 'in', '@in', 'clean_restaurant_data_w_keys').
+annotation(26, 1, 154, 'out', '@out', 'clean_restaurant_data_renamed').
+annotation(27, 1, 156, 'end', '@end', 'RenameCols').
+annotation(28, 1, 175, 'begin', '@BEGIN', 'SaveInspections').
+annotation(29, 1, 176, 'in', '@in', 'clean_restaurant_data_renamed').
+annotation(30, 1, 180, 'end', '@end', 'SaveInspections').
+annotation(31, 1, 182, 'begin', '@BEGIN', 'SaveRestaurants').
+annotation(32, 1, 183, 'in', '@in', 'clean_restaurant_data_renamed').
+annotation(33, 1, 187, 'end', '@end', 'SaveRestaurants').
+annotation(34, 1, 189, 'begin', '@BEGIN', 'SaveRestaurantInspections').
+annotation(35, 1, 190, 'in', '@in', 'clean_restaurant_data_renamed').
+annotation(36, 1, 194, 'end', '@end', 'SaveRestaurantInspections').
+annotation(37, 1, 196, 'begin', '@BEGIN', 'SaveAddresses').
+annotation(38, 1, 197, 'in', '@in', 'clean_restaurant_data_renamed').
+annotation(39, 1, 201, 'end', '@end', 'SaveAddresses').
+annotation(40, 1, 203, 'end', '@end', 'restaurant_inspection_pipeline').
+
+% FACT: annotation_qualifies(qualifying_annotation_id, primary_annotation_id).
+annotation_qualifies(2, 1).
+annotation_qualifies(5, 4).
