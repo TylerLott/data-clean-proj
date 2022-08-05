@@ -34,4 +34,10 @@
 * `db_use_case_queries.ipynb`
     * includes queries to support use case
 
+### **`Workflow`**
+* `make.sh` and `settings.sh`
+    * bash scripts for workflow
+* `results`
+    * produced workflow items
+
 
