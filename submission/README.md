@@ -31,17 +31,10 @@
         * includes queries to support use case
 
 4. `queries.txt`
-        * includes, use case, IC, & FD queries
+    * includes, use case, IC, & FD queries
 
 5. `DataLinks.txt`
     * includes link to clean and dirty datasets
     * includes link to GitHub
 
-
-### **`Workflow`**
-* `workflow.drawio`
-    * src workflow diagram
-* `results`
-    * collection of all workflow diagrams
-
-
+    
