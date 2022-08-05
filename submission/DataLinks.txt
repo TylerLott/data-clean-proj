@@ -2,10 +2,13 @@
 DataLinks.txt
 ---------------------------------------------------------------
 
-* Dirty Data - 
+* Dirty Data - https://uofi.box.com/s/9k6tw7do7s9r7ts4acknr162beabo55u
     * Food_Inspections.csv
 
-* Clean Data - 
+* Partial Clean after OpenRefine - https://uofi.box.com/s/9k6tw7do7s9r7ts4acknr162beabo55u
+    * Open_Refine_Inspections.csv
+
+* Clean Data - https://uofi.box.com/s/9k6tw7do7s9r7ts4acknr162beabo55u
     * EstablishmentInspections.csv
     * Establishment.csv
     * Inspections.csv
