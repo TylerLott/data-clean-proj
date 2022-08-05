@@ -51,8 +51,9 @@ Ensure you have python 3.10 (you can probably use a lower version too)
 ### Zip File
 
 1. Workflow Model
-   - [ ] `Workflow.yw`  
-   - [ ] `Workflow.gv`  
+   - [x] `data_cleaning.py`  
+   - [x] `complete_wf_graph.gv`
+   - [x] `complete_wf_graph_uri.gv`  
    <BR>
 
 2. OpenRefine
@@ -72,7 +73,7 @@ Ensure you have python 3.10 (you can probably use a lower version too)
 5. External links
    - [x] `DataLinks.txt`
       - [x] dirty data [Food_Inspections.csv](https://uofi.app.box.com/folder/166723381455)
-      - [ ] clean data
+      - [x] clean data
          - `EstablishmentInspections.csv`
          - `Establishment.csv`
          - `Inspections.csv`

@@ -9,7 +9,12 @@
 ## **Submission Contents**
 
 1. **`Workflow Model`**
-    * TODO
+    * `data_cleaning.py`
+        * includes workflow annotations
+    * `complete_wf_graph.gv`
+        * workflow diagram
+    * `complete_wf_graph_uri.gv`
+        * workflow diagram with uri template
 
 2. `OpenRefine_History.json`
     * operation history on the dirty dataset
