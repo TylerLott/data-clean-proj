@@ -56,22 +56,22 @@ Ensure you have python 3.10 (you can probably use a lower version too)
    <BR>
 
 2. OpenRefine
-   - [x] `OpenRefineHistory.json`
-   - [ ] `OR2YW.yw`  
+   - [x] `OpenRefineHistory.json`  
    <BR>
 
 3. Other Datacleaning Tools
    - [x] `data_cleaning.py`
    - [x] `notebooks/db_cleaning_exploration.ipynb`
-   <BR>
-
-4. Queries
    - [x] `notebooks/db_queries.ipynb`  
    <BR>
 
+4. Queries
+   - [x] `queries.txt`  
+   <BR>
+
 5. External links
-   - [ ] `DataLinks.txt`
-      - [ ] dirty data [Food_Inspections.csv](https://uofi.app.box.com/folder/166723381455)
+   - [x] `DataLinks.txt`
+      - [x] dirty data [Food_Inspections.csv](https://uofi.app.box.com/folder/166723381455)
       - [ ] clean data
          - `EstablishmentInspections.csv`
          - `Establishment.csv`
@@ -87,12 +87,12 @@ Ensure you have python 3.10 (you can probably use a lower version too)
 
 The follwoing files need to be in the box folder:
 
-   - [ ] `Food_Inspections.csv`
+   - [x] `Food_Inspections.csv`
 
-   - [ ] `EstablishmentInspections.csv`
+   - [x] `EstablishmentInspections.csv`
 
-   - [ ] `Establishment.csv`
+   - [x] `Establishment.csv`
 
-   - [ ] `Inspections.csv`
+   - [x] `Inspections.csv`
 
    

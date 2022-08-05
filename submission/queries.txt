@@ -1,0 +1,63 @@
+# Use Case Queries
+
+## Before
+SELECT e.estName as Name, COUNT(i.violations) as Violations
+FROM Inspections AS i
+INNER JOIN EstablishmentInspections AS ei
+ON i.inspecID = ei.inspecID
+INNER JOIN Establishments AS e
+ON e.estID = ei.estID
+WHERE i.result = "Fail"
+GROUP BY e.estID
+ORDER BY Violations DESC
+
+## After
+SELECT e.estName as Name, COUNT(i.number) as Violations
+FROM Inspections AS i
+INNER JOIN EstablishmentInspections AS ei
+ON i.inspecID = ei.inspecID
+INNER JOIN Establishments AS e
+ON e.estID = ei.estID
+WHERE i.result = "Fail"
+GROUP BY e.estID
+ORDER BY Violations DESC
+
+# IC & FD Queries
+SELECT * 
+FROM Establishments 
+WHERE estID IS NULL
+
+SELECT * 
+FROM EstablishmentInspections
+WHERE estID IS NULL OR inspecID IS NULL
+
+SELECT * 
+FROM Inspections
+WHERE inspecID IS NULL
+
+SELECT ei.estID
+FROM EstablishmentInspections AS ei 
+WHERE ei.estID NOT IN (SELECT estID FROM Establishments)
+
+SELECT inspecID
+FROM Inspections 
+WHERE inspecID NOT IN (SELECT inspecID FROM EstablishmentInspections)
+
+SELECT estID , COUNT(estID) as count_of_estID
+FROM Establishments
+GROUP BY estID
+HAVING COUNT(*) > 1
+
+SELECT estID, inspecID, COUNT(*) as count
+FROM EstablishmentInspections
+GROUP BY estID,inspecID
+HAVING COUNT(*) > 1
+
+SELECT number
+FROM Inspections
+WHERE number NOT BETWEEN 1 and 70
+
+SELECT E1.estName as ename1, E2.estName as ename2
+FROM Establishments as E1 , Establishments as E2
+WHERE E1.estID = E2.estID AND E1.estName != E2.estName
+
