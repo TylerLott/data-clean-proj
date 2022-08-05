@@ -1,0 +1,14 @@
+
+DataLinks.txt
+---------------------------------------------------------------
+
+* Dirty Data - 
+    * Food_Inspections.csv
+
+* Clean Data - 
+    * EstablishmentInspections.csv
+    * Establishment.csv
+    * Inspections.csv
+
+* GitHub - https://github.com/TylerLott/data-clean-proj
+

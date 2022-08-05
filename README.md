@@ -56,17 +56,17 @@ Ensure you have python 3.10 (you can probably use a lower version too)
    <BR>
 
 2. OpenRefine
-   - [ ] `OpenRefineHistory.json`
+   - [x] `OpenRefineHistory.json`
    - [ ] `OR2YW.yw`  
    <BR>
 
 3. Other Datacleaning Tools
-   - [ ] `data_cleaning.py`
-   - [ ] `notebooks/db_cleaning_exploration.ipynb`
+   - [x] `data_cleaning.py`
+   - [x] `notebooks/db_cleaning_exploration.ipynb`
    <BR>
 
 4. Queries
-   - [ ] `notebooks/db_queries.ipynb`  
+   - [x] `notebooks/db_queries.ipynb`  
    <BR>
 
 5. External links
@@ -76,23 +76,23 @@ Ensure you have python 3.10 (you can probably use a lower version too)
          - `EstablishmentInspections.csv`
          - `Establishment.csv`
          - `Inspections.csv`
-      - [ ] [GitHub](https://github.com/TylerLott/data-clean-proj)  
+      - [x] [GitHub](https://github.com/TylerLott/data-clean-proj)  
       <BR>
 
 6. README
-   - [ ] create a `README.md` that explains the contents files in the zip folder  
+   - [x] create a `README.md` that explains the contents files in the zip folder  
    <BR>
 
 ### Box Folder
 
 The follwoing files need to be in the box folder:
 
-   * `Food_Inspections.csv`
+   - [ ] `Food_Inspections.csv`
 
-   * `EstablishmentInspections.csv`
+   - [ ] `EstablishmentInspections.csv`
 
-   * `Establishment.csv`
+   - [ ] `Establishment.csv`
 
-   * `Inspections.csv`
+   - [ ] `Inspections.csv`
 
    
